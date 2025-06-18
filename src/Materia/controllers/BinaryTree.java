@@ -73,6 +73,18 @@ public class BinaryTree {
         }
     }
 
-
+    public boolean findeValue(int value){
+        Node actual = root;
+    while (actual != null) {
+        if (value == actual.getValue()) {
+            return true;
+        } else if (value < actual.getValue()) {
+            actual = actual.getLeft();
+        } else {
+            actual = actual.getRight();
+        }
+    }
+    return false;
+    }
     
 }
