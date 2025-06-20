@@ -5,15 +5,17 @@ import Materia.models.Node;
 public class BinaryTree {
     
     private Node root;
+    private int size ;
 
     public BinaryTree() {
         this.root = null;
+        this.size =0;
     }
 
     public void insert(int value){
         //null, 50
         root = insertRec(root, value);
-
+        size++;
     }
 
     private Node insertRec(Node padre, int value){
@@ -47,6 +49,14 @@ public class BinaryTree {
         printInOrderRec(root);
     }
 
+    public void imprimirArbolInH(){
+        printInOrderRecH(root);
+    }
+
+    public void imprimirArbolInE(){
+        printInOrderRecE(root);
+    }
+
     private void printPreOrderRec(Node node){
         if(node != null){
             System.out.print(node.getValue()+", ");
@@ -73,6 +83,38 @@ public class BinaryTree {
         }
     }
 
+    private void printInOrderRecH(Node node){
+        if(node != null){
+
+            printInOrderRecH(node.getLeft());
+            System.out.print(node.getValue()+" (h= "+ getHeightTreeRec(node)+"),");
+            printInOrderRecH(node.getRight());
+        }
+    }
+
+    private void printInOrderRecE(Node node){
+        if(node != null){
+
+            printInOrderRecE(node.getLeft());
+            System.out.print(node.getValue()+" (bf= "+ factorEquilibrioRec(node)+"),");
+            printInOrderRecE(node.getRight());
+        }
+    }
+
+    public void factorEquilibrio(){
+        factorEquilibrioRec(root);
+    }
+
+    private int factorEquilibrioRec(Node node){
+        if(node==null){
+            return 0;
+        }
+        int leftHeight = getHeightTreeRec(node.getLeft());
+        int rightHeight = getHeightTreeRec(node.getRight());
+
+        return leftHeight-rightHeight;
+    }
+
     public boolean findeValue(int value){
         Node actual = root;
     while (actual != null) {
@@ -86,5 +128,63 @@ public class BinaryTree {
     }
     return false;
     }
+
+    public int getHeightTree(){
+        return getHeightTreeRec(root);
+    }
+
+    private int getHeightTreeRec(Node node){
+        if(node==null){
+            return 0;
+        }
+        int leftHeight = getHeightTreeRec(node.getLeft());
+        int rightHeight = getHeightTreeRec(node.getRight());
+
+        return Math.max(leftHeight+1, rightHeight+1);
+
+        
+    }
+
+    public int imprimirPeso(){
+        return size;
+    }
+
+    public boolean arbolEquilibrado() {
+    return estaBalanceado(root);
+    }
+
+    private boolean estaBalanceado(Node node) {
+        if (node == null) {
+            return true;
+        }
+
+        int num = factorEquilibrioRec(node);
+        if (num < -1 || num> 1) {
+            return false;
+        }
+
+        return estaBalanceado(node.getLeft()) && estaBalanceado(node.getRight());
+    }
+
+    
+    public void nodosDesequilibrados() {
+        System.out.println("Nodos desequilibrados:");
+        listarDesequilibrados(root);
+    }
+
+    private void listarDesequilibrados(Node node) {
+        if (node != null) {
+            listarDesequilibrados(node.getLeft());
+
+            int bf = factorEquilibrioRec(node);
+            if (bf < -1 || bf > 1) {
+                System.out.println("Valor: " + node.getValue() + " (bf = " + bf + ")");
+            }
+
+            listarDesequilibrados(node.getRight());
+        }
+    }
+
+
     
 }
