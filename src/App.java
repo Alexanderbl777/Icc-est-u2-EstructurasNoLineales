@@ -1,3 +1,4 @@
+import Materia.controllers.AVLTree;
 import Materia.controllers.BinaryTree;
 
 public class App {
@@ -66,5 +67,12 @@ public class App {
         System.out.println();
         ab.nodosDesequilibrados();
 
+        System.out.println("---------------------");
+
+        AVLTree avl = new AVLTree();
+        avl.insert(5);
+        avl.insert(20);
+        avl.insert(15);
+        avl.inOrder();
     }
 }

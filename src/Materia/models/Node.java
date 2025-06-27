@@ -4,6 +4,8 @@ public class  Node{
     private int value;
     private Node right;
     private Node left;
+    private int height;
+    
 
     public Node(int value) {
         this.value = value;
@@ -35,6 +37,12 @@ public class  Node{
     @Override
     public String toString() {
         return "Node [value=" + value+ "";
+    }
+    public int getHeight() {
+        return height;
+    }
+    public void setHeight(int height) {
+        this.height = height;
     }
 
 }

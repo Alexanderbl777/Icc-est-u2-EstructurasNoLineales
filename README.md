@@ -17,7 +17,7 @@ Meanwhile, the compiled output files will be generated in the `bin` folder by de
 
 RESULTADOS:
 
-![Árbol binario](./src/Imagen/Arbol19.png)
+![Árbol binario](./src/Imagen/Arbol20.png)
 
 
 ## Dependency Management
